@@ -4,7 +4,6 @@ on:
     types: [ published ]
   push:
     tags:
-      - v0.*
       - v1.*
 jobs:
   push_to_registry:
