@@ -106,6 +106,5 @@ dist
 # Docker generated files and folders
 letsencrypt/
 mysql/
-Dockerfile
 docker-compose.yml
 startup.sql
