@@ -51,10 +51,9 @@ const route = async (req, res) => {
 
 const validateDetails = async (body) => {
 	//basic formatting (with an exception for the default admin account)
-	if (!validateEmail(body.email) && body.email != `admin@${process.env.WEB_ADDRESS}`) {
+	if (!validateEmail(body.email) && body.email != `${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}`) {
 		return 'invalid email';
 	}
-	//TODO: restore default admin account
 
 	//check for existing (banned)
 	//TODO: restore banning

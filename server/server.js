@@ -15,7 +15,10 @@ app.use(cors());
 //database connection
 const database = require('./database');
 
-//access the news
+const admin = require('./admin');
+admin.defaultAccount();
+
+//access the auth
 app.use('/auth', require('./auth'));
 
 //error on access

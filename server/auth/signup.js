@@ -78,6 +78,11 @@ const validateDetails = async (body) => {
 		return 'username already exists';
 	}
 
+	//validate password
+	if (body.password.length < 8) {
+		return 'password too short';
+	}
+
 	return null;
 };
 
