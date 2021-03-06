@@ -1,0 +1,8 @@
+WEB_PORT=3200
+
+DB_HOSTNAME=database
+DB_DATABASE=auth
+DB_USERNAME=auth
+DB_PASSWORD=venusaur
+DB_TIMEZONE=Australia/Sydney
+
