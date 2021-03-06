@@ -1,3 +1,5 @@
+WEB_PROTOCOL=http
+WEB_ADDRESS=localhost
 WEB_PORT=3200
 
 DB_HOSTNAME=database
@@ -6,3 +8,10 @@ DB_USERNAME=auth
 DB_PASSWORD=venusaur
 DB_TIMEZONE=Australia/Sydney
 
+MAIL_SMTP=smtp.example.com
+MAIL_USERNAME=foobar@example.com
+MAIL_PASSWORD=examplepassword
+MAIL_PHYSICAL=42 Placeholder Ave, Placeholder, 0000, USA
+
+SECRET_ACCESS=access
+SECRET_REFRESH=refresh

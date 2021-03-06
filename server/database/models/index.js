@@ -1,3 +1,5 @@
 module.exports = {
-	//TODO: models
-};
+	tokens: require('./tokens'),
+	accounts: require('./accounts'),
+	pendingSignups: require('./pending-signups')
+}

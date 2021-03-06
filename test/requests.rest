@@ -1,0 +1,68 @@
+#Signup
+POST http://127.0.0.1:3200/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+	"email": "kayneruse@gmail.com",
+	"username": "Ratstail91",
+	"password": "helloworld"
+}
+
+###
+
+#Login
+POST http://127.0.0.1:3200/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+	"email": "kayneruse@gmail.com",
+	"password": "helloworld"
+}
+
+###
+
+#Query data
+GET http://127.0.0.1:3200/auth/account HTTP/1.1
+Authorization: Bearer
+
+###
+
+#Logout
+DELETE http://127.0.0.1:3200/auth/logout HTTP/1.1
+Authorization: Bearer
+
+{
+	"token": ""
+}
+
+###
+
+#Refresh
+POST http://127.0.0.1:3200/auth/token HTTP/1.1
+Content-Type: application/json
+
+{
+	"token": ""
+}
+
+###
+
+#Update account data
+PATCH http://127.0.0.1:3200/auth/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer
+
+{
+	"contact": "true"
+}
+
+###
+
+#Delete account
+DELETE http://127.0.0.1:3200/auth/deletion HTTP/1.1
+Authorization: Bearer
+Content-Type: application/json
+
+{
+	"password": "helloworld"
+}
