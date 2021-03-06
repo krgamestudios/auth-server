@@ -104,4 +104,8 @@ dist
 .tern-port
 
 # Docker generated files and folders
-data/
+letsencrypt/
+mysql/
+Dockerfile
+docker-compose.yml
+startup.sql
