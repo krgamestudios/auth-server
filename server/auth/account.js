@@ -4,7 +4,7 @@ const { accounts } = require('../database/models');
 const route = async (req, res) => {
 	const account = await accounts.findOne({
 		where: {
-			username: req.user.username
+			id: req.user.id
 		}
 	});
 

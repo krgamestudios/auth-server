@@ -43,7 +43,7 @@ const route = async (req, res) => {
 	});
 
 	//generate the JWT
-	const tokens = generate(account.username, account.privilege);
+	const tokens = generate(account.id, account.username, account.privilege);
 
 	//finally
 	res.status(200).json(tokens);
