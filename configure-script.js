@@ -54,7 +54,7 @@ const question = (prompt, def = null) => {
 version: '3'
 
 services:
-  app:
+  ${appName}:
     build:
       context: .
     ports:
@@ -90,14 +90,15 @@ services:
   database:
     image: mariadb:latest
     environment:
-      MYSQL_DATABASE: ${appName}
-      MYSQL_USER: ${appDBUser}
-      MYSQL_PASSWORD: ${appDBPass}
-      MYSQL_ROOT_PASSWORD: ${dbRootPass}
+      - MYSQL_DATABASE: ${appName}
+      - MYSQL_USER: ${appDBUser}
+      - MYSQL_PASSWORD: ${appDBPass}
+      - MYSQL_ROOT_PASSWORD: ${dbRootPass}
     networks: 
       - app-network
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
   traefik:
     image: "traefik:v2.4"
     container_name: "traefik"
@@ -116,7 +117,6 @@ services:
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro"
     networks:
       - app-network
 networks:
