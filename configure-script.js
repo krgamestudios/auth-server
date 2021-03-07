@@ -140,7 +140,7 @@ CMD ["sleep 10 && npm start"]
 	const sqlfile = `
 CREATE DATABASE IF NOT EXISTS ${appName};
 CREATE USER IF NOT EXISTS '${appDBUser}'@'%' IDENTIFIED BY '${appDBPass}';
-GRANT ALL PRIVILEGES ON ${appName}.* TO '${appDBUser}'@'%';	
+GRANT ALL PRIVILEGES ON ${appName}.* TO '${appDBUser}'@'%';
 `;
 
 	fs.writeFileSync('docker-compose.yml', ymlfile);
