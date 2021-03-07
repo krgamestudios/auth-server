@@ -100,6 +100,7 @@ services:
       - ./mysql:/var/lib/mysql
       - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
   traefik_${appName}:
+    container_name: ${appName}_traefik
     image: "traefik:v2.4"
     container_name: "traefik"
     command:
