@@ -17,7 +17,7 @@ const route = async (req, res) => {
 
 	//compare the user's password
 	const compare = utils.promisify(bcrypt.compare);
-	const match = await compare(req.body.password, account.hash);
+	const match = await compare(req.body.password || '', account.hash);
 
 	if (!match) {
 		return res.status(401).send('incorrect password');
