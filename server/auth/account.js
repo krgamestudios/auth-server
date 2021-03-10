@@ -14,7 +14,7 @@ const route = async (req, res) => {
 
 	//respond with the private-facing data
 	res.status(200).json({
-		contact: await account.contact
+		contact: account.contact
 	});
 };
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //middleware
-const authToken = require('../utilities/token-auth');
+const tokenAuth = require('../utilities/token-auth');
 
 //signup -> validate -> login all without a token
 router.post('/signup', require('./signup'));
@@ -13,7 +13,7 @@ router.post('/login', require('./login'));
 router.post('/token', require('./token'));
 
 //middleware
-router.use(authToken);
+router.use(tokenAuth);
 
 //basic account management (needs a token)
 router.delete('/logout', require('./logout'));
