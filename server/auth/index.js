@@ -21,4 +21,6 @@ router.get('/account', require('./account'));
 router.patch('/update', require('./update'));
 router.delete('/deletion', require('./deletion'));
 
+router.patch('/account/privilege', require('./account-privilege'));
+
 module.exports = router;

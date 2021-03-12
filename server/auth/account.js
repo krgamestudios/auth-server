@@ -9,11 +9,11 @@ const route = async (req, res) => {
 	});
 
 	if (!account) {
-		res.status(401).send('Unknown account');
+		return res.status(401).send('Unknown account');
 	}
 
 	//respond with the private-facing data
-	res.status(200).json({
+	return res.status(200).json({
 		contact: account.contact
 	});
 };

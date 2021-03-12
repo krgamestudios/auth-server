@@ -77,4 +77,13 @@ Content-Type: application/json
 	"password": "helloworld"
 }
 
+//DOCS: Sets the privilege of the specified user; usable only by admins
+DELETE /auth/deletion
+Authorization: Bearer accessToken
+Content-Type: application/json
+
+{
+	"username": "example",
+	"privilege: "administrator"
+}
 ```
