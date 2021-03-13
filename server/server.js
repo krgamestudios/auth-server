@@ -15,8 +15,8 @@ app.use(cors());
 //database connection
 const database = require('./database');
 
-const admin = require('./admin');
-admin.defaultAccount();
+//access the admin
+app.use('/admin', require('./admin'));
 
 //access the auth
 app.use('/auth', require('./auth'));

@@ -37,9 +37,13 @@ Content-Type: application/json
 	"refreshToken": "fghij"
 }
 
-//DOCS: Retreives the private account data, results vary
-GET /auth/account
-Authorization: Bearer accessToken
+//Replace an expired authToken pair with these values
+POST /auth/token
+Content-Type: application/json
+
+{
+	"token": "refreshToken"
+}
 
 //DOCS: After this is called, the refresh route will no longer work
 DELETE /auth/logout
@@ -49,13 +53,9 @@ Authorization: Bearer accessToken
 	"token": "refreshToken"
 }
 
-//Replace an expired authToken pair with these values
-POST /auth/token
-Content-Type: application/json
-
-{
-	"token": "refreshToken"
-}
+//DOCS: Retreives the private account data, results vary
+GET /auth/account
+Authorization: Bearer accessToken
 
 //Result
 {
@@ -64,12 +64,12 @@ Content-Type: application/json
 }
 
 //DOCS: Update account data, input varies, but is always JSON
-PATCH /auth/update
+PATCH /auth/account
 Content-Type: application/json
 Authorization: Bearer accessToken
 
 //DOCS: Sets the timer, account will be deleted after 2 days
-DELETE /auth/deletion
+DELETE /auth/account
 Authorization: Bearer accessToken
 Content-Type: application/json
 
@@ -78,7 +78,7 @@ Content-Type: application/json
 }
 
 //DOCS: Sets the privilege of the specified user; usable only by admins
-DELETE /auth/deletion
+PATCH /auth/admin/privilege
 Authorization: Bearer accessToken
 Content-Type: application/json
 

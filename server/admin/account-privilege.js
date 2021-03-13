@@ -2,11 +2,6 @@ const { accounts } = require('../database/models');
 
 //auth/account/privilege
 const route = async (req, res) => {
-	//check the user's privilege
-	if (req.user.privilege != 'administrator') {
-		return res.status(401).send('Only admins can change privilege');
-	}
-
 	const updated = await accounts.update({
 		privilege: req.body.privilege
 	}, {

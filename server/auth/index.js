@@ -17,10 +17,8 @@ router.use(tokenAuth);
 
 //basic account management (needs a token)
 router.delete('/logout', require('./logout'));
-router.get('/account', require('./account'));
-router.patch('/update', require('./update'));
-router.delete('/deletion', require('./deletion'));
-
-router.patch('/account/privilege', require('./account-privilege'));
+router.get('/account', require('./account-query'));
+router.patch('/account', require('./account-update'));
+router.delete('/account', require('./account-delete'));
 
 module.exports = router;
