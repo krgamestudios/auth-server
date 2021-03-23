@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken');
 const { tokens } = require('../database/models');
 
 //generates a JWT token based on the given arguments
-module.exports = (id, username, privilege) => {
+module.exports = (id, username, type, admin, mod) => {
 	const content = {
 		id,
 		username,
-		privilege
+		type,
+		admin,
+		mod,
 	};
 
 	const accessToken = jwt.sign(content, process.env.SECRET_ACCESS, { expiresIn: '10m' });

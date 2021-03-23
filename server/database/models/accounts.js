@@ -10,12 +10,6 @@ module.exports = sequelize.define('accounts', {
 		unique: true
 	},
 
-	privilege: {
-		type: Sequelize.ENUM,
-		values: ['administrator', 'moderator', 'alpha', 'beta', 'gamma', 'normal'],
-		defaultValue: 'normal'
-	},
-
 	email: {
 		type: 'varchar(320)',
 		unique: true
@@ -27,6 +21,24 @@ module.exports = sequelize.define('accounts', {
 	},
 
 	hash: 'varchar(100)', //for passwords
+
+	type: {
+		type: Sequelize.ENUM,
+		values: ['normal', 'alpha', 'beta', 'gamma'],
+		defaultValue: 'normal'
+	},
+
+	admin: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+		defaultValue: false
+	},
+
+	mod: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+		defaultValue: false
+	},
 
 	contact: {
 		type: Sequelize.BOOLEAN,

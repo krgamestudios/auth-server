@@ -20,16 +20,18 @@ module.exports = async () => {
 	//check for an existing admin account
 	const adminRecord = await accounts.findOne({
 		where: {
-			privilege: 'administrator'
+			admin: true
 		}
 	});
 
 	if (adminRecord == null) {
 		await accounts.create({
-			privilege: 'administrator',
 			email: `${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}`,
 			username: `${process.env.ADMIN_DEFAULT_USERNAME}`,
-			hash: await bcrypt.hash(`${process.env.ADMIN_DEFAULT_PASSWORD}`, await bcrypt.genSalt(11))
+			hash: await bcrypt.hash(`${process.env.ADMIN_DEFAULT_PASSWORD}`, await bcrypt.genSalt(11)),
+			type: 'normal',
+			admin: true,
+			mod: true
 		});
 
 		console.warn(`Created default admin account (email: ${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}; password: ${process.env.ADMIN_DEFAULT_PASSWORD})`);

@@ -24,7 +24,7 @@ module.exports = (token, callback) => {
 			return callback(403);
 		}
 
-		const result = generate(user.id, user.username, user.privilege);
+		const result = generate(user.id, user.username, user.type, user.admin, user.mod);
 
 		destroy(token);
 

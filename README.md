@@ -76,14 +76,4 @@ Content-Type: application/json
 {
 	"password": "helloworld"
 }
-
-//DOCS: Sets the privilege of the specified user; usable only by admins
-PATCH /auth/admin/privilege
-Authorization: Bearer accessToken
-Content-Type: application/json
-
-{
-	"username": "example",
-	"privilege: "administrator"
-}
 ```
