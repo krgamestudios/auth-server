@@ -42,6 +42,11 @@ const route = async (req, res) => {
 		}
 	});
 
+	//reject on banned
+	if (account.banned) {
+		return res.status(403).send('this account has been banned');
+	}
+
 	//generate the JWT
 	const tokens = generate(account.id, account.username, account.type, account.admin, account.mod);
 

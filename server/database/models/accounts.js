@@ -40,6 +40,12 @@ module.exports = sequelize.define('accounts', {
 		defaultValue: false
 	},
 
+	banned: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+		defaultValue: false
+	},
+
 	contact: {
 		type: Sequelize.BOOLEAN,
 		allowNull: false,
