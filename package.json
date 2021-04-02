@@ -7,9 +7,9 @@
     "start": "node server/server.js",
     "dev": "npm run watch:server",
     "watch:server": "nodemon . --ext js,jsx,json --ignore 'node_modules/*'",
-	"docker": "npm run docker:build && npm run docker:push",
-	"docker:build": "docker buildx build . --platform amd64 --tag docker.krgamestudios.com/krgamestudios/02-auth:latest",
-	"docker:push": "docker push docker.krgamestudios.com/krgamestudios/02-auth:latest"
+    "docker": "npm run docker:build && npm run docker:push",
+    "docker:build": "docker buildx build . --platform amd64 --tag docker.krgamestudios.com/krgamestudios/02-auth:latest",
+    "docker:push": "docker push docker.krgamestudios.com/krgamestudios/02-auth:latest"
   },
   "repository": {
     "type": "git",
