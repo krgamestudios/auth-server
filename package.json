@@ -1,5 +1,5 @@
 {
-  "name": "auth-server",
+  "name": "02-auth",
   "version": "1.0.0",
   "description": "An API centric auth server. Uses Sequelize and mariaDB by default.",
   "main": "server/server.js",
@@ -13,14 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krgamestudios/auth-server.git"
+    "url": "https://gitea.krgamestudios.com/krgamestudios/02-auth.git"
   },
   "author": "Kayne Ruse",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/krgamestudios/auth-server/issues"
-  },
-  "homepage": "https://github.com/krgamestudios/auth-server#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
