@@ -16,7 +16,7 @@ const route = async (req, res) => {
 		hash: hash
 	}, {
 		where: {
-			id: req.user.id
+			index: req.user.index
 		}
 	});
 
