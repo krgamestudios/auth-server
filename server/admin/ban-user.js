@@ -9,7 +9,7 @@ const route = async (req, res) => {
 	}, {
 		where: {
 			username: {
-				[Op.eq]: req.body.username
+				[Op.eq]: req.body.username || ''
 			},
 			admin: {
 				[Op.not]: true
@@ -27,7 +27,7 @@ const route = async (req, res) => {
 	//forcibly logout
 	tokens.destroy({
 		where: {
-			username: req.body.username
+			username: req.body.username || ''
 		}
 	});
 

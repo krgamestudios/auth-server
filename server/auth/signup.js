@@ -70,7 +70,7 @@ const validateDetails = async (body) => {
 	//check for existing username
 	const usernameRecord = await accounts.findOne({
 		where: {
-			username: body.username
+			username: body.username || ''
 		}
 	});
 

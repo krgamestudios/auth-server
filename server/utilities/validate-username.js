@@ -6,11 +6,11 @@ module.exports = username => {
 	if (username.length < 8 && username.length > 100) {
 		return false;
 	}
-	
+
 	if (!isAlpha(username)) {
 		return false;
 	}
-	
+
 	return true;
 }
 

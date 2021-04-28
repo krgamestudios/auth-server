@@ -5,7 +5,7 @@ const route = async (req, res) => {
 	//get the existing pending signup
 	const info = await pendingSignups.findOne({
 		where: {
-			username: req.query.username
+			username: req.query.username || ''
 		}
 	});
 
@@ -29,7 +29,7 @@ const route = async (req, res) => {
 	//delete the pending signup
 	pendingSignups.destroy({
 		where: {
-			username: req.query.username
+			username: req.query.username || ''
 		}
 	});
 

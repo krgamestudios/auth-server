@@ -19,7 +19,7 @@ const route = async (req, res) => {
 	//get the existing account
 	const account = await accounts.findOne({
 		where: {
-			email: req.body.email
+			email: req.body.email || ''
 		}
 	});
 

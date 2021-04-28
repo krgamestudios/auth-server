@@ -10,7 +10,7 @@ const route = async (req, res) => {
 	}, {
 		where: {
 			username: {
-				[Op.eq]: req.body.username
+				[Op.eq]: req.body.username || ''
 			}
 		}
 	});
