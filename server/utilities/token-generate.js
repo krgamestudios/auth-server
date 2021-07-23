@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const { tokens } = require('../database/models');
 
 //generates a JWT token based on the given arguments
-module.exports = (id, username, type, admin, mod) => {
+module.exports = (index, username, type, admin, mod) => {
 	const content = {
-		id,
+		index,
 		username,
 		type,
 		admin,

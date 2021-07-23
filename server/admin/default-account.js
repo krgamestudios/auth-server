@@ -25,8 +25,9 @@ module.exports = async () => {
 	});
 
 	if (adminRecord == null) {
+		const webAddress = process.env.WEB_ADDRESS == 'localhost' ? 'example.com' : process.env.WEB_ADDRESS; //can't log in as "localhost"
 		await accounts.create({
-			email: `${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}`,
+			email: `${process.env.ADMIN_DEFAULT_USERNAME}@${webAddress}`,
 			username: `${process.env.ADMIN_DEFAULT_USERNAME}`,
 			hash: await bcrypt.hash(`${process.env.ADMIN_DEFAULT_PASSWORD}`, await bcrypt.genSalt(11)),
 			type: 'normal',
@@ -34,6 +35,6 @@ module.exports = async () => {
 			mod: true
 		});
 
-		console.warn(`Created default admin account (email: ${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}; password: ${process.env.ADMIN_DEFAULT_PASSWORD})`);
+		console.warn(`Created default admin account (email: ${process.env.ADMIN_DEFAULT_USERNAME}@${webAddress}; password: ${process.env.ADMIN_DEFAULT_PASSWORD})`);
 	}
 };

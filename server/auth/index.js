@@ -20,7 +20,7 @@ router.use(tokenAuth);
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
 		where: {
-			username: req.user.username
+			username: req.user.username || ''
 		}
 	});
 

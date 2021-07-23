@@ -11,7 +11,7 @@ const { accounts } = require('../database/models');
 const route = async (req, res) => {
 	const account = await accounts.findOne({
 		where: {
-			id: req.user.id
+			index: req.user.index
 		}
 	});
 
@@ -30,7 +30,7 @@ const route = async (req, res) => {
 	},
 	{
 		where: {
-			id: req.user.id
+			index: req.user.index
 		}
 	});
 

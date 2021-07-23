@@ -5,11 +5,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const bodyParser = require('body-parser');
 const cors = require('cors');
 
 //config
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 //database connection

@@ -19,7 +19,7 @@ const route = async (req, res) => {
 	//get the existing account
 	const account = await accounts.findOne({
 		where: {
-			email: req.body.email
+			email: req.body.email || ''
 		}
 	});
 
@@ -38,7 +38,7 @@ const route = async (req, res) => {
 	//cancel deletion if any
 	await accounts.update({ deletion: null }, {
 		where: {
-			id: account.id
+			index: account.index
 		}
 	});
 
@@ -48,7 +48,7 @@ const route = async (req, res) => {
 	}
 
 	//generate the JWT
-	const tokens = generate(account.id, account.username, account.type, account.admin, account.mod);
+	const tokens = generate(account.index, account.username, account.type, account.admin, account.mod);
 
 	//finally
 	res.status(200).json(tokens);
