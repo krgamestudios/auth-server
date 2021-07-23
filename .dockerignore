@@ -3,3 +3,5 @@
 tools*
 mysql*
 letsencrypt*
+
+.env*
