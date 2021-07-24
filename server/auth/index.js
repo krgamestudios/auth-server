@@ -17,6 +17,9 @@ router.post('/token', require('./token'));
 //middleware
 router.use(tokenAuth);
 
+//logouts allowed when banned, still needs tokens
+router.delete('/logout', require('./logout'));
+
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
 		where: {
@@ -36,7 +39,6 @@ router.use(async (req, res, next) => {
 });
 
 //basic account management (needs a token)
-router.delete('/logout', require('./logout'));
 router.get('/account', require('./account-query'));
 router.patch('/account', require('./account-update'));
 router.delete('/account', require('./account-delete'));

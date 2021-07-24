@@ -9,18 +9,26 @@ const { accounts } = require('../database/models');
 
 //auth/deletion
 const route = async (req, res) => {
+	if (!req.body.password) {
+		return res.status(401).end('Missing password');
+	}
+
 	const account = await accounts.findOne({
 		where: {
-			index: req.user.index
+			index: req.user.index || ''
 		}
 	});
 
+	if (!account) {
+		return res.status(401).end('Missing account');
+	}
+
 	//compare the user's password
 	const compare = utils.promisify(bcrypt.compare);
-	const match = await compare(req.body.password || '', account.hash);
+	const match = await compare(req.body.password, account.hash);
 
 	if (!match) {
-		return res.status(401).send('incorrect password');
+		return res.status(401).send('Incorrect password');
 	}
 
 	//set the deletion time (2 days from now)

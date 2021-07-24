@@ -13,7 +13,7 @@ const route = async (req, res) => {
 	//validate the given details
 	const validateErr = await validateDetails(req.body);
 	if (validateErr) {
-		return res.status(401).send(validateErr);
+		return res.status(401).end(validateErr);
 	}
 
 	//get the existing account
@@ -55,13 +55,18 @@ const route = async (req, res) => {
 };
 
 const validateDetails = async (body) => {
-	//basic formatting (with an exception for the default admin account)
-	if (!validateEmail(body.email) && body.email != `${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}`) {
-		return 'invalid email';
+	if (!body.email) {
+		return 'Missing email';
 	}
 
-	//check for existing (banned)
-	//TODO: restore banning
+	if (!body.password) {
+		return 'Missing password';
+	}
+
+	//basic formatting (with an exception for the default admin account)
+	if (!validateEmail(body.email) && body.email != `${process.env.ADMIN_DEFAULT_USERNAME}@${process.env.WEB_ADDRESS}`) {
+		return 'Invalid email';
+	}
 
 	return null;
 }

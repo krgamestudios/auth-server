@@ -4,12 +4,12 @@ const { accounts } = require('../database/models');
 const route = async (req, res) => {
 	const account = await accounts.findOne({
 		where: {
-			index: req.user.index
+			index: req.user.index || ''
 		}
 	});
 
 	if (!account) {
-		return res.status(401).send('Unknown account');
+		return res.status(401).end('Unknown account');
 	}
 
 	//respond with the private-facing data

@@ -11,11 +11,11 @@ const route = async (req, res) => {
 
 	//check the given info
 	if (!info) {
-		return res.status(401).send('validation failed');
+		return res.status(401).send('Validation failed');
 	}
 
 	if (info.token != req.query.token) {
-		return res.status(401).send('tokens do not match');
+		return res.status(401).send('Tokens do not match');
 	}
 
 	//move data to the accounts table

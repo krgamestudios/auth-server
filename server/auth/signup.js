@@ -46,11 +46,11 @@ const route = async (req, res) => {
 const validateDetails = async (body) => {
 	//basic formatting
 	if (!validateEmail(body.email)) {
-		return 'invalid email';
+		return 'Invalid email';
 	}
 
 	if (!validateUsername(body.username)) {
-		return 'invalid username';
+		return 'Invalid username';
 	}
 
 	//check for existing (banned)
@@ -64,23 +64,31 @@ const validateDetails = async (body) => {
 	});
 
 	if (emailRecord) {
-		return 'email already exists';
+		return 'Email already exists';
+	}
+
+	if (!body.username) {
+		return 'Missing username';
 	}
 
 	//check for existing username
 	const usernameRecord = await accounts.findOne({
 		where: {
-			username: body.username || ''
+			username: body.username
 		}
 	});
 
 	if (usernameRecord) {
-		return 'username already exists';
+		return 'Username already exists';
 	}
 
 	//validate password
+	if (!body.password) {
+		return 'Missing password';
+	}
+
 	if (body.password.length < 8) {
-		return 'password too short';
+		return 'Password too short';
 	}
 
 	return null;
