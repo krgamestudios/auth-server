@@ -15,7 +15,7 @@ const route = async (req, res) => {
 	const hash = await bcrypt.hash(req.body.password, await bcrypt.genSalt(11));
 
 	//update the account data
-	accounts.update({
+	await accounts.update({
 		hash: hash
 	}, {
 		where: {
@@ -24,20 +24,23 @@ const route = async (req, res) => {
 	})
 
 	//delete from the recovery table
-	recovery.destroy({
+	await recovery.destroy({
 		where: {
 			email: req.query.email
 		}
 	});
 
+	res.status(200).end();
 	return null;
 };
 
 const validateDetails = async (query, body) => {
 	//verify the recovery record exists
-	const record = recovery.findOne({
-		email: query.email,
-		token: query.token
+	const record = await recovery.findOne({
+		where: {
+			email: query.email,
+			token: query.token
+		}
 	});
 
 	if (!record) {

@@ -3,8 +3,10 @@ const { accounts, recovery } = require('../database/models');
 //auth/reset
 const route = async (req, res) => {
 	//verify the recovery record exists
-	const record = recovery.findOne({
-		token: req.query.token
+	const record = await recovery.findOne({
+		where: {
+			token: req.query.token
+		}
 	});
 
 	if (!record) {
@@ -12,7 +14,7 @@ const route = async (req, res) => {
 	}
 
 	//redirect to the front-end
-	res.redirect(`${process.env.WEB_PROTOCOL}${process.env.WEB_RESET_ADDRESS}?email=${record.email}&token=${record.token}`);
+	res.redirect(`${process.env.WEB_PROTOCOL}://${process.env.WEB_RESET_ADDRESS}?email=${record.email}&token=${record.token}`);
 	return null;
 };
 

@@ -25,13 +25,13 @@ const route = async (req, res) => {
 	}
 
 	//save the token
-	recovery.upsert({
+	await recovery.upsert({
 		email: req.body.email,
 		token: token
 	});
 
 	//finally
-	res.status(200).send("Validation email sent!");
+	res.status(200).send("Recovery email sent!");
 	return null;
 };
 
@@ -57,7 +57,7 @@ const validateDetails = async (body) => {
 };
 
 const sendRecoveryEmail = async (email, token) => {
-	const addr = `${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}/auth/validation?token=${token}`;
+	const addr = `${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}/auth/reset?token=${token}`;
 	const msg = `Hello,
 
 Please visit the following link to reset your password: ${addr}
