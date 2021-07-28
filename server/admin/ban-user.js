@@ -27,7 +27,7 @@ const route = async (req, res) => {
 	//forcibly logout
 	tokens.destroy({
 		where: {
-			username: req.body.username || ''
+			email: req.body.email || ''
 		}
 	});
 

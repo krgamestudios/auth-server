@@ -6,7 +6,6 @@ const Op = Sequelize.Op;
 
 const { accounts, pendingSignups } = require('../database/models');
 
-
 //utilities
 const uuid = require('../utilities/uuid');
 const validateEmail = require('../utilities/validate-email');

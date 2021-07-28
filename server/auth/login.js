@@ -3,7 +3,7 @@ const utils = require('util');
 const bcrypt = require('bcryptjs');
 
 const { accounts } = require('../database/models');
-const generate = require('../utilities/token-generate');
+const tokenGenerate = require('../utilities/token-generate');
 
 //utilities
 const validateEmail = require('../utilities/validate-email');
@@ -48,10 +48,10 @@ const route = async (req, res) => {
 	}
 
 	//generate the JWT
-	const tokens = generate(account.index, account.username, account.type, account.admin, account.mod);
+	const token = tokenGenerate(account.index, account.email, account.username, account.type, account.admin, account.mod);
 
 	//finally
-	res.status(200).json(tokens);
+	res.status(200).json(token);
 };
 
 const validateDetails = async (body) => {

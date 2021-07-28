@@ -23,7 +23,7 @@ router.delete('/logout', require('./logout'));
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
 		where: {
-			username: req.user.username || ''
+			email: req.user.email || ''
 		}
 	});
 
