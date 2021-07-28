@@ -70,7 +70,7 @@ services:
     environment:
       - WEB_PROTOCOL=https
       - WEB_ADDRESS=${appWebAddress}
-	  - WEB_RESET_ADDRESS=${resetAddress}
+      - WEB_RESET_ADDRESS=${resetAddress}
       - WEB_PORT=${appPort}
       - DB_HOSTNAME=database
       - DB_DATABASE=${appName}
