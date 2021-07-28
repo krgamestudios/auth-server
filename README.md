@@ -83,4 +83,28 @@ Content-Type: application/json
 {
 	"password": "helloworld"
 }
+
+
+//DOCS: Send the link to recover a forgotten password
+POST /auth/recover
+Content-Type: application/json
+
+{
+	"email": "kayneruse@gmail.com"
+}
+
+
+//DOCS: Redirect the link to recover a password to the front-end
+GET /auth/reset?token=<token>
+
+//Result
+301 -> ${WEB_RESET_ADDRESS}?email=<email>&token=<token>
+
+
+//DOCS: Resets a password for the given email, correct token is required
+PATCH /auth/reset?email=<email>&token=<token>
+
+{
+	"password": "password"
+}
 ```

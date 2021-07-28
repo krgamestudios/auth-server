@@ -1,5 +1,6 @@
 WEB_PROTOCOL=http
 WEB_ADDRESS=localhost
+WEB_RESET_ADDRESS=localhost/reset
 WEB_PORT=3200
 
 DB_HOSTNAME=database

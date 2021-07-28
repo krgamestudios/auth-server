@@ -14,6 +14,11 @@ router.post('/login', require('./login'));
 //refresh token
 router.post('/token', require('./token'));
 
+//password recover and reset
+router.post('/recover', require('./password-recover'));
+router.get('/reset', require('./password-redirect'));
+router.patch('/reset', require('./password-reset'));
+
 //middleware
 router.use(tokenAuth);
 
