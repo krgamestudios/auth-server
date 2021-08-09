@@ -4,12 +4,12 @@ const { tokens } = require('../database/models');
 const generate = require('./token-generate');
 const destroy = require('./token-destroy');
 
-module.exports = (token, callback) => {
+module.exports = async (token, callback) => {
 	if (!token) {
 		return callback(401);
 	}
 
-	const tokenRecord = tokens.findOne({
+	const tokenRecord = await tokens.findOne({
 		where: {
 			token: token || ''
 		}
