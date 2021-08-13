@@ -19,11 +19,11 @@ router.post('/recover', require('./password-recover'));
 router.get('/reset', require('./password-redirect'));
 router.patch('/reset', require('./password-reset'));
 
+//logouts allowed when banned, and when the token itself is invalid
+router.delete('/logout', require('./logout'));
+
 //middleware
 router.use(tokenAuth);
-
-//logouts allowed when banned, still needs tokens
-router.delete('/logout', require('./logout'));
 
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
