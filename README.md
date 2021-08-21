@@ -20,8 +20,14 @@ Content-Type: application/json
 }
 
 
-//DOCS: Used for validating the email address above
+###
+
+
+//DOCS: Used for validating the email address specified above
 GET /auth/validation?username=example&token=12345678
+
+
+###
 
 
 //DOCS: Login after validation
@@ -33,20 +39,32 @@ Content-Type: application/json
 	"password": "helloworld"
 }
 
-//Result (access token's value is your authorization key below)
+//DOCS: Result (access token's value is your authorization key below)
 {
 	"accessToken": "abcde",
 	"refreshToken": "fghij"
 }
 
 
-//DOCS: Replace an expired authToken pair with these values
+###
+
+
+//DOCS: Replace an expired authToken pair with new values
 POST /auth/token
 Content-Type: application/json
 
 {
 	"token": "refreshToken"
 }
+
+//DOCS: Result
+{
+	"accessToken": "abcde",
+	"refreshToken": "fghij"
+}
+
+
+###
 
 
 //DOCS: After this is called, the refresh route will no longer work
@@ -58,21 +76,29 @@ Authorization: Bearer accessToken
 }
 
 
+###
+
+
 //DOCS: Retreives the private account data, results vary
 GET /auth/account
 Authorization: Bearer accessToken
 
-//Result
-{
-	"accessToken": "abcde",
-	"refreshToken": "fghij"
-}
+
+###
 
 
-//DOCS: Update account data, input varies, but is always JSON
+//DOCS: Update account data
 PATCH /auth/account
 Content-Type: application/json
 Authorization: Bearer accessToken
+
+{
+	"password": "helloworld",
+	"contact": true
+}
+
+
+###
 
 
 //DOCS: Sets the timer, account will be deleted after 2 days
@@ -85,6 +111,9 @@ Content-Type: application/json
 }
 
 
+###
+
+
 //DOCS: Send the link to recover a forgotten password
 POST /auth/recover
 Content-Type: application/json
@@ -94,11 +123,17 @@ Content-Type: application/json
 }
 
 
+###
+
+
 //DOCS: Redirect the link to recover a password to the front-end
 GET /auth/reset?token=<token>
 
-//Result
+//DOCS: Result
 301 -> ${WEB_RESET_ADDRESS}?email=<email>&token=<token>
+
+
+###
 
 
 //DOCS: Resets a password for the given email, correct token is required
@@ -107,4 +142,7 @@ PATCH /auth/reset?email=<email>&token=<token>
 {
 	"password": "password"
 }
+
+
+###
 ```
