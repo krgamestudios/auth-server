@@ -1,9 +1,9 @@
 
-FROM node:15
+FROM node:16
 WORKDIR "/app"
 COPY package*.json ./
-COPY . /app
 RUN npm install --production
+COPY . /app
 EXPOSE 3200
 USER node
 ENTRYPOINT ["bash", "-c"]
