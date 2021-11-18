@@ -12,8 +12,8 @@ module.exports = (index, email, username, type, admin, mod) => {
 		mod,
 	};
 
-	const accessToken = jwt.sign(content, process.env.SECRET_ACCESS, { expiresIn: '10m' });
-	const refreshToken = jwt.sign(content, process.env.SECRET_REFRESH, { expiresIn: '30d' });
+	const accessToken = jwt.sign(content, process.env.SECRET_ACCESS, { expiresIn: '10m', issuer: 'auth' });
+	const refreshToken = jwt.sign(content, process.env.SECRET_REFRESH, { expiresIn: '30d', issuer: 'auth' });
 
 	tokens.create({ token: refreshToken, email: email });
 

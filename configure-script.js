@@ -85,7 +85,7 @@ services:
       - ADMIN_DEFAULT_PASSWORD=${appDefaultPass}
       - SECRET_ACCESS=${appSecretAccess}
       - SECRET_REFRESH=${appSecretRefresh}
-    networks: 
+    networks:
       - app-network
     depends_on:
       - database
@@ -96,7 +96,7 @@ services:
       MYSQL_USER: ${appDBUser}
       MYSQL_PASSWORD: ${appDBPass}
       MYSQL_ROOT_PASSWORD: ${dbRootPass}
-    networks: 
+    networks:
       - app-network
     volumes:
       - ./mysql:/var/lib/mysql
