@@ -30,6 +30,7 @@ const question = (prompt, def = null) => {
 	//project configuration
 	const appName = await question('App Name', 'auth');
 	const appWebAddress = await question('Web Addr', `${appName}.example.com`);
+	const postValidationHook = await question('Post Validation Hook', '');
 	const resetAddress = await question('Reset Addr', `example.com/reset`);
 	const appPort = await question('App Port', '3200');
 
@@ -70,6 +71,7 @@ services:
     environment:
       - WEB_PROTOCOL=https
       - WEB_ADDRESS=${appWebAddress}
+      - HOOK_POST_VALIDATION=${postValidationHook}
       - WEB_RESET_ADDRESS=${resetAddress}
       - WEB_PORT=${appPort}
       - DB_HOSTNAME=database

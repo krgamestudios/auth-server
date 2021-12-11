@@ -1,4 +1,5 @@
 const { pendingSignups, accounts } = require('../database/models');
+const fetch = require('node-fetch');
 
 //auth/validation
 const route = async (req, res) => {
@@ -19,7 +20,7 @@ const route = async (req, res) => {
 	}
 
 	//move data to the accounts table
-	accounts.create({
+	const [account] = await accounts.upsert({
 		email: info.email,
 		username: info.username,
 		hash: info.hash,
@@ -35,6 +36,21 @@ const route = async (req, res) => {
 
 	//finally
 	res.status(200).send('Validation succeeded!');
+
+	//post-validation hook
+	if (process.env.HOOK_POST_VALIDATION) {
+		const probe = await fetch(`https://${process.env.HOOK_POST_VALIDATION}?accountIndex=${account.index}`);
+
+		if (!probe.ok) {
+			console.error('Could not probe the post validation hook');
+		} else {
+			console.log('Validation hook probe successful'); //TODO: remove this
+		}
+
+		//discard the result
+	} else {
+		console.log('No validation hook'); //TODO: remove this
+	}
 };
 
 module.exports = route;
