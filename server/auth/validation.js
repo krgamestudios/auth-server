@@ -20,7 +20,7 @@ const route = async (req, res) => {
 	}
 
 	//move data to the accounts table
-	const [account] = await accounts.upsert({
+	const account = await accounts.create({
 		email: info.email,
 		username: info.username,
 		hash: info.hash,
