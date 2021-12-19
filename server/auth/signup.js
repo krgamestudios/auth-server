@@ -52,9 +52,6 @@ const validateDetails = async (body) => {
 		return 'Invalid username';
 	}
 
-	//check for existing (banned)
-	//TODO: re-add banned email checks
-
 	//check for existing email
 	const emailRecord = await accounts.findOne({
 		where: {

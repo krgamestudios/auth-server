@@ -30,7 +30,7 @@ const route = async (req, res) => {
 	//delete the pending signup
 	pendingSignups.destroy({
 		where: {
-			username: req.query.username || ''
+			username: info.username || ''
 		}
 	});
 
@@ -43,13 +43,9 @@ const route = async (req, res) => {
 
 		if (!probe.ok) {
 			console.error('Could not probe the post validation hook');
-		} else {
-			console.log('Validation hook probe successful'); //TODO: remove this
 		}
 
 		//discard the result
-	} else {
-		console.log('No validation hook'); //TODO: remove this
 	}
 };
 
