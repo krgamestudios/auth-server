@@ -107,12 +107,12 @@ const registerPendingSignup = async (body, hash, token) => {
 
 const sendValidationEmail = async (email, username, token) => {
 	const addr = `${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}/auth/validation?username=${username}&token=${token}`;
-	const msg = `Hello ${username}!
-
-Please visit the following link to validate your account: ${addr}
-
-You can contact us directly at our physical mailing address here: ${process.env.MAIL_PHYSICAL}
-`;
+	const msg =
+  `Hello ${username}!\n\n` +
+  `Please visit the following link to validate your account: ${addr}\n` +
+  (process.env.MAIL_PHYSICAL
+    ? `\nYou can contact us directly at our physical mailing address here: ${process.env.MAIL_PHYSICAL}\n`
+    : ``);
 
 	let transporter, info;
 
