@@ -2,6 +2,8 @@
 
 An API centric auth server. Uses Sequelize and mariaDB by default.
 
+This server is available via docker hub at krgamestudios/auth-server.
+
 # Setup
 
 There are multiple ways to run this app - it can run on it's own via `npm start` (for production) or `npm run dev` (for development). it can also run inside docker using `docker-compose up --build` - run `node configure-script.js` to generate docker-compose.yml and startup.sql.
