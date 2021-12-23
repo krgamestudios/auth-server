@@ -35,7 +35,7 @@ const question = (prompt, def = null) => {
 	const appPort = await question('App Port', '3200');
 
 	const appDBUser = await question('DB User', appName);
-	const appDBPass = await question('DB Pass', uuid());
+	const appDBPass = await question('DB Pass', 'charizard');
 	const dbRootPass = await question('DB Root Pass');
 
 	const appMailSMTP = await question('Mail SMTP', 'smtp.example.com');
