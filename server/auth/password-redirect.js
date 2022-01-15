@@ -5,7 +5,7 @@ const route = async (req, res) => {
 	//verify the recovery record exists
 	const record = await recovery.findOne({
 		where: {
-			token: req.query.token
+			token: req.query.token || ''
 		}
 	});
 
