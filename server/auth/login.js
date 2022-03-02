@@ -13,7 +13,7 @@ const route = async (req, res) => {
 	//validate the given details
 	const validateErr = await validateDetails(req.body);
 	if (validateErr) {
-		return res.status(401).end(validateErr);
+		return res.status(401).send(validateErr);
 	}
 
 	//get the existing account
@@ -29,6 +29,7 @@ const route = async (req, res) => {
 
 	//compare passwords
 	const compare = utils.promisify(bcrypt.compare);
+
 	const match = await compare(req.body.password, account.hash);
 
 	if (!match) {
@@ -47,11 +48,12 @@ const route = async (req, res) => {
 		return res.status(403).send('this account has been banned');
 	}
 
-	//generate the JWT
-	const token = tokenGenerate(account.index, account.email, account.username, account.type, account.admin, account.mod);
+	//generate the JWTs
+	const tokens = tokenGenerate(account.index, account.email, account.username, account.type, account.admin, account.mod);
 
 	//finally
-	res.status(200).json(token);
+	res.status(200).json(tokens);
+	return null;
 };
 
 const validateDetails = async (body) => {

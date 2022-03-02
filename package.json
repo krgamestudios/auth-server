@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "npm run watch:server",
-    "watch:server": "nodemon . --ext js,jsx,json --ignore 'node_modules/*'"
+    "watch:server": "nodemon . --ext js,jsx,json --ignore 'node_modules/*'",
+    "test": "jest --coverage --collectCoverageFrom=server/**/*.{js,jsx}"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "nodemon": "^2.0.12"
   }
 }
