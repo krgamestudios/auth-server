@@ -123,7 +123,7 @@ POST /auth/recover
 Content-Type: application/json
 
 {
-	"email": "kayneruse@gmail.com"
+	"email": "example@example.com"
 }
 
 
