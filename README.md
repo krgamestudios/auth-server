@@ -28,8 +28,10 @@ Content-Type: application/json
 //DOCS: Used for validating the email address specified above
 GET /auth/validation?username=example&token=12345678
 
-//DOCS: If the environment variable HOOK_POST_VALIDATION is set to a URL, then the server will send a GET message to that URL with the newly created account's index
-GET https://{HOOK_POST_VALIDATION}?accountIndex={index}
+//DOCS: If the environment variable HOOK_POST_VALIDATION_ARRAY is set to a JSON array of valid URLs, then the server will send a GET message to each URL with the newly created account's index
+//DOCS: The GET requests will have a JWT authorization header
+HOOK_POST_VALIDATION_ARRAY=["http://example.com", "http://example2.com"]
+GET {HOOK_POST_VALIDATION_ARRAY[i]}?accountIndex={index}
 
 ###
 

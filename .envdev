@@ -30,3 +30,6 @@ SECRET_ACCESS=access
 
 # Make sure this value is kept secret
 SECRET_REFRESH=refresh
+
+# Post-signup hook JSON array (MUST include http:// or https://)
+HOOK_POST_VALIDATION_ARRAY=

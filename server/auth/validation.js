@@ -1,5 +1,6 @@
 const { pendingSignups, accounts } = require('../database/models');
 const fetch = require('node-fetch');
+const jwt = require('jsonwebtoken');
 
 //auth/validation
 const route = async (req, res) => {
@@ -38,14 +39,42 @@ const route = async (req, res) => {
 	res.status(200).send('Validation succeeded!');
 
 	//post-validation hook
-	if (process.env.HOOK_POST_VALIDATION) {
-		const probe = await fetch(`https://${process.env.HOOK_POST_VALIDATION}?accountIndex=${account.index}`);
+	if (process.env.HOOK_POST_VALIDATION_ARRAY) {
+		try {
+			hooks = JSON.parse(process.env.HOOK_POST_VALIDATION_ARRAY);
 
-		if (!probe.ok) {
-			console.error('Could not probe the post validation hook');
+			if (!Array.isArray(hooks)) {
+				throw 'isArray() check failed';
+			}
+
+			//authenticate the hooks
+			const bearer = jwt.sign({ type: 'hook authentication' }, process.env.SECRET_ACCESS, { expiresIn: '5m', issuer: 'auth' });
+
+			//promise for each given hook
+			const promises = hooks.map(async hook => {
+				if (typeof hook != 'string') {
+					throw 'hook is not a string';
+				}
+
+				const probe = await fetch(`${hook}?accountIndex=${account.index}`, {
+					method: 'GET',
+					headers: {
+						'Authorization': `Bearer ${bearer}`
+					}
+				});
+
+				if (!probe.ok) {
+					throw `Could not probe the post validation hook: ${hook}`;
+				}
+
+				//discard the result
+			});
+
+			Promise.all(promises);
 		}
-
-		//discard the result
+		catch(e) {
+			console.error('HOOK_POST_VALIDATION_ARRAY is not a valid array of strings in JSON format: ' + e);
+		}
 	}
 };
 
