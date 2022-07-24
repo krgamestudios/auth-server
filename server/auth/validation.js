@@ -64,13 +64,13 @@ const route = async (req, res) => {
 				});
 
 				if (!probe.ok) {
-					throw `Could not probe the post validation hook: ${hook}`;
+					throw `Could not probe the post validation hook: ${hook} with accountIndex = ${account.index}`;
 				}
 
 				//discard the result
 			});
 
-			Promise.all(promises);
+			await Promise.all(promises);
 		}
 		catch(e) {
 			console.error('HOOK_POST_VALIDATION_ARRAY is not a valid array of strings in JSON format: ' + e);
