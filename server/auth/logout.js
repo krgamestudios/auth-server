@@ -2,7 +2,9 @@ const tokenDestroy = require('../utilities/token-destroy');
 
 //auth/logout
 const route = (req, res) => {
-	tokenDestroy(req.body.token);
+	//stored in the cookie
+	console.log(req.cookies.refreshToken)
+	tokenDestroy(req.cookies.refreshToken);
 
 	return res.status(200).end();
 };

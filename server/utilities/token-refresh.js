@@ -1,17 +1,17 @@
 const jwt = require('jsonwebtoken');
 const { tokens } = require('../database/models');
 
-const generate = require('./token-generate');
+const generate = require('./token-generate-refresh');
 const destroy = require('./token-destroy');
 
-module.exports = async (token, callback) => {
-	if (!token) {
+module.exports = async (oldRefreshToken, callback) => {
+	if (!oldRefreshToken) {
 		return callback(401);
 	}
 
 	const tokenRecord = await tokens.findOne({
 		where: {
-			token: token || ''
+			token: oldRefreshToken || ''
 		}
 	});
 
@@ -19,15 +19,15 @@ module.exports = async (token, callback) => {
 		return callback(403);
 	}
 
-	jwt.verify(token, process.env.SECRET_REFRESH, (err, user) => {
+	jwt.verify(oldRefreshToken, process.env.SECRET_REFRESH, (err, user) => {
 		if (err) {
 			return callback(403);
 		}
 
-		const result = generate(user.index, user.email, user.username, user.type, user.admin, user.mod);
+		const { accessToken, refreshToken } = generate(user.index, user.email, user.username, user.type, user.admin, user.mod);
 
-		destroy(token);
+		destroy(oldRefreshToken);
 
-		return callback(null, result);
+		return callback(null, accessToken, refreshToken);
 	});
 };

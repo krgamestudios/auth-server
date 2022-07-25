@@ -1,9 +1,9 @@
 const { tokens } = require('../database/models');
 
-module.exports = (token) => {
+module.exports = (refreshToken) => {
 	tokens.destroy({
 		where: {
-			token: token || ''
+			token: refreshToken || ''
 		}
 	});
 }

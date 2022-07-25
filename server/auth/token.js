@@ -4,13 +4,16 @@ const tokenRefresh = require('../utilities/token-refresh');
 
 //auth/token
 module.exports = async (req, res) => {
-	const refreshToken = req.body.token;
+	console.log(req.cookies);
 
-	return tokenRefresh(refreshToken, (err, token) => {
+	return tokenRefresh(req.cookies.refreshToken || '', (err, accessToken, refreshToken) => {
 		if (err) {
 			return res.status(err).end();
 		}
 
-		return res.status(200).send(token);
+		//set the cookie
+		res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 60 * 60 * 24 * 30 }); //30 days
+
+		return res.status(200).send(accessToken);
 	});
 };

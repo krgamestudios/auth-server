@@ -25,7 +25,7 @@ module.exports = async () => {
 	});
 
 	if (adminRecord == null) {
-		const webAddress = process.env.WEB_ADDRESS == 'localhost' ? 'example.com' : process.env.WEB_ADDRESS; //can't log in as "localhost"
+		const webAddress = process.env.WEB_ADDRESS == 'localhost:3000' ? 'example.com' : process.env.WEB_ADDRESS; //can't log in as "localhost"
 		await accounts.create({
 			email: `${process.env.ADMIN_DEFAULT_USERNAME}@${webAddress}`,
 			username: `${process.env.ADMIN_DEFAULT_USERNAME}`,

@@ -6,10 +6,19 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 //config
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+	credentials: true,
+	// origin: `${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}`,
+	origin: true,
+	methods: ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'TRACE', 'OPTIONS']
+}));
+
+app.use(cookieParser());
 
 //database connection
 const database = require('./database');

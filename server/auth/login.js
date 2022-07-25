@@ -3,7 +3,7 @@ const utils = require('util');
 const bcrypt = require('bcryptjs');
 
 const { accounts } = require('../database/models');
-const tokenGenerate = require('../utilities/token-generate');
+const tokenGenerateRefresh = require('../utilities/token-generate-refresh');
 
 //utilities
 const validateEmail = require('../utilities/validate-email');
@@ -49,10 +49,13 @@ const route = async (req, res) => {
 	}
 
 	//generate the JWTs
-	const tokens = tokenGenerate(account.index, account.email, account.username, account.type, account.admin, account.mod);
+	const { accessToken, refreshToken } = tokenGenerateRefresh(account.index, account.email, account.username, account.type, account.admin, account.mod);
+
+	//set the cookie
+	res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 60 * 60 * 24 * 30 }); //30 days
 
 	//finally
-	res.status(200).json(tokens);
+	res.status(200).send(accessToken);
 	return null;
 };
 
