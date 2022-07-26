@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(cors({
 	credentials: true,
-	origin: [`${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}`],
+	origin: [`${process.env.WEB_PROTOCOL}://${process.env.WEB_ORIGIN}`],
 	allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie'],
 	exposedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie'],
 }));
