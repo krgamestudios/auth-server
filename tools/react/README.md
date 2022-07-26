@@ -47,7 +47,7 @@ export default Component;
 The most useful features provided by TokenProvider are:
 
 * `tokenFetch()`, which wraps the `fetch()` API to ensure that your access token is valid
-* `tokenCallback()`, which passes the authTokens as a parameter to any function passed into it
+* `tokenCallback()`, which passes the accessToken as a parameter to any function passed into it
 * `getPayload()`, which returns the payload of the accessToken (including as "email", "username", "admin", and "mod")
 * `accessToken`, this will be falsy if the user is not logged in
 

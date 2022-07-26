@@ -46,41 +46,35 @@ Content-Type: application/json
 }
 
 //DOCS: Result (access token's value is your authorization key below)
+Set-Cookie: refreshToken
+
 {
-	"accessToken": "abcde",
-	"refreshToken": "fghij"
+	"accessToken": "abcde"
 }
 
 
 ###
 
 
-//DOCS: Replace an expired authToken pair with new values
+//DOCS: Replace an expired accessToken with a new value
 POST /auth/token
-Content-Type: application/json
-
-{
-	"token": "refreshToken"
-}
+Cookie: refreshToken
 
 //DOCS: Result
+Set-Cookie: refreshToken
+
 {
-	"accessToken": "abcde",
-	"refreshToken": "fghij"
+	"accessToken": "abcde"
 }
 
 
 ###
 
 
-//DOCS: After this is called, the refresh route will no longer work
+//DOCS: After this is called, the /auth/token route will no longer work
 DELETE /auth/logout
 Authorization: Bearer accessToken
-
-{
-	"token": "refreshToken"
-}
-
+Cookie: refreshToken
 
 ###
 
