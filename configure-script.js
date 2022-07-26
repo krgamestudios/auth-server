@@ -29,8 +29,9 @@ const question = (prompt, def = null) => {
 (async () => {
 	//project configuration
 	const appName = await question('App Name', 'auth');
-	const appWebOrigin = await question('Web Origin', `example.com`);
-	const appWebAddress = await question('Web Addr', `${appName}.${appWebOrigin}`);
+	const appWebProtocol = await question('Web Protocol', 'https');
+	const appWebOrigin = await question('Web Origin', `${appWebProtocol}://example.com`); //TODO: clean these up properly
+	const appWebAddress = await question('Web Addr', `${appName}.example.com`);
 	const postValidationHookArray = await question('Post Validation Hook Array', '');
 	const resetAddress = await question('Reset Addr', `example.com/reset`);
 	const appPort = await question('App Port', '3200');
@@ -70,7 +71,7 @@ services:
       - "traefik.http.routers.${appName}router.service=${appName}service@docker"
       - "traefik.http.services.${appName}service.loadbalancer.server.port=${appPort}"
     environment:
-      - WEB_PROTOCOL=https
+      - WEB_PROTOCOL=${appWebProtocol}
       - WEB_ORIGIN=${appWebOrigin}
       - WEB_ADDRESS=${appWebAddress}
       - HOOK_POST_VALIDATION_ARRAY=${postValidationHookArray}
