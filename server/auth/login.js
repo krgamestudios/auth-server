@@ -52,7 +52,7 @@ const route = async (req, res) => {
 	const { accessToken, refreshToken } = tokenGenerateRefresh(account.index, account.email, account.username, account.type, account.admin, account.mod);
 
 	//set the cookie
-	res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 60 * 60 * 24 * 30 }); //30 days
+	res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true, secure: true, sameSite: 'none', maxAge: 60 * 60 * 24 * 30 * 1000 }); //30 days
 
 	//finally
 	res.status(200).send(accessToken);

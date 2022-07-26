@@ -13,9 +13,9 @@ app.use(express.json());
 
 app.use(cors({
 	credentials: true,
-	// origin: `${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}`,
-	origin: true,
-	methods: ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'TRACE', 'OPTIONS']
+	origin: [`${process.env.WEB_PROTOCOL}://${process.env.WEB_ADDRESS}`],
+	allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie'],
+	exposedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie'],
 }));
 
 app.use(cookieParser());
