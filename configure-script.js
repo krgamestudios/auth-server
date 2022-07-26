@@ -30,8 +30,8 @@ const question = (prompt, def = null) => {
 	//project configuration
 	const appName = await question('App Name', 'auth');
 	const appWebProtocol = await question('Web Protocol', 'https');
-	const appWebOrigin = await question('Web Origin', `${appWebProtocol}://example.com`); //TODO: clean these up properly
 	const appWebAddress = await question('Web Addr', `${appName}.example.com`);
+	const appWebOrigin = await question('Web Origin', `${appWebProtocol}://example.com`); //TODO: clean these up properly
 	const postValidationHookArray = await question('Post Validation Hook Array', '');
 	const resetAddress = await question('Reset Addr', `example.com/reset`);
 	const appPort = await question('App Port', '3200');
