@@ -29,7 +29,7 @@
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.8.0",
-    "sequelize": "^6.25.5"
+    "sequelize": "^6.25.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
