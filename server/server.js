@@ -36,6 +36,17 @@ app.get('*', (req, res) => {
 
 //startup
 server.listen(process.env.WEB_PORT || 3200, async (err) => {
+	//BUGFIX: clear out old refresh tokens
+	const { Op } = require('sequelize');
+	const { tokens } = require('./database/models');
+	tokens.destroy({
+		where: {
+			createdAt: {
+				[Op.lt]: new Date(new Date().setDate(new Date().getDate() - 30))
+			}
+		}
+	});
+
 	await database.sync();
 	console.log(`listening to localhost:${process.env.WEB_PORT || 3200}`);
 });
