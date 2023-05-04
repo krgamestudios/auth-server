@@ -25,6 +25,11 @@ const TokenProvider = props => {
 		localStorage.setItem("accessToken", accessToken);
 	}, [accessToken]);
 
+	//force a logout if refresh token is too old
+	if (accessToken && (new Date(Date.now() - 60 * 60 * 24 * 30 * 1000).getTime() > decode(accessToken).exp * 1000)) {
+		forceLogout();
+	}
+
 	//wrap the default fetch function
 	const tokenFetch = async (url, options) => {
 		//use this?
