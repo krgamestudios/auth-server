@@ -19,6 +19,13 @@ const route = async (req, res) => {
 		return res.status(401).send(validateErr);
 	}
 
+	//script throttle
+	const throttle = await checkThrottle(req.body.email);
+	if (throttle) {
+		console.warn(`Spam attack detected: ${req.body.email} (${req.body.username})`);
+		return res.status(401).send(throttle);
+	}
+
 	//generate the password hash
 	const hash = await bcrypt.hash(req.body.password, await bcrypt.genSalt(11));
 
@@ -93,6 +100,25 @@ const validateDetails = async (body) => {
 
 	return null;
 };
+
+const checkThrottle = async (email) => {
+	//check email delay
+	const prev = await pendingSignups.findOne({
+		where: {
+			email: email,
+		}
+	});
+
+	const DateOffset = ( offset ) => { //Thanks, SO!
+		return new Date( +new Date + offset );
+	}
+
+	if (!!prev && prev.updatedAt > DateOffset( -5000 )) {
+		return "An unknown error occurred";
+	}
+
+	return null;
+}
 
 const registerPendingSignup = async (body, hash, token) => {
 	const record = await pendingSignups.upsert({
