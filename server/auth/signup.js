@@ -83,6 +83,10 @@ const validateDetails = async (body) => {
 		return 'Missing password';
 	}
 
+	if (typeof body.password != "string") {
+		return 'Invalid password';
+	}
+
 	if (body.password.length < 8) {
 		return 'Password too short';
 	}
