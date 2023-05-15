@@ -121,7 +121,21 @@ const checkThrottle = async (email) => {
 }
 
 const registerPendingSignup = async (body, hash, token) => {
-	const record = await pendingSignups.upsert({
+	//BUGFIX: delete existing pending signups that clash
+	await pendingSignups.destroy({
+		where: {
+			email: body.email
+		}
+	});
+
+	await pendingSignups.destroy({
+		where: {
+			username: body.username
+		}
+	});
+
+	//record it
+	const record = await pendingSignups.create({
 		email: body.email,
 		username: body.username,
 		hash: hash,
