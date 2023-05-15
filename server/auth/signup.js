@@ -22,7 +22,7 @@ const route = async (req, res) => {
 	//script throttle
 	const throttle = await checkThrottle(req.body.email);
 	if (throttle) {
-		console.warn(`Spam attack detected: ${req.body.email} (${req.body.username})`);
+		console.warn(`Spam Throttled\t${req.body.email} (${req.body.username})`);
 		return res.status(401).send(throttle);
 	}
 

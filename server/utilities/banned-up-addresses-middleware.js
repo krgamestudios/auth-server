@@ -10,16 +10,24 @@ module.exports = async (req, res, next) => {
 			content: address,
 
 			expiry: {
-				[Op.gt]: Date.now()
+				[Op.or]: {
+					//future or forever
+					[Op.gt]: Date.now(),
+					[Op.eq]: null,
+				}
 			}
 		}
 	});
 
+	//log the access timestamp
+	const date = new Date();
+
 	if (!!record) {
+		console.log(`IP blocked\t${address}\t\t\t${date.toTimeString()}`);
 		return res.status(403).send("IP address banned");
 	}
 
-	console.log(`IP      ${address}`);
+	console.log(`IP allowed\t${address}\t\t\t${date.toTimeString()}`);
 
 	return next();
 };
