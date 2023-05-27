@@ -24,7 +24,7 @@ app.use(cookieParser());
 const database = require('./database');
 
 //ip-based management
-app.use(require('./utilities/banned-up-addresses-middleware'));
+app.use(require('./utilities/banned-ip-addresses-middleware'));
 
 //access the admin
 app.use('/admin', require('./admin'));
