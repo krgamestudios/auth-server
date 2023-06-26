@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
 		return res.status(403).send("IP address banned");
 	}
 
-	console.log(`IP allowed\t${address}\t\t\t${date.toTimeString()}`);
+	// console.log(`IP allowed\t${address}\t\t\t${date.toTimeString()}`);
 
 	return next();
 };
