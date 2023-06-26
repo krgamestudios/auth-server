@@ -1,6 +1,6 @@
 {
   "name": "auth-server",
-  "version": "1.7.10",
+  "version": "1.7.11",
   "description": "An API centric auth server. Uses Sequelize and mariaDB by default.",
   "main": "server/server.js",
   "scripts": {
