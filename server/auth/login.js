@@ -49,7 +49,7 @@ const route = async (req, res) => {
 	}
 
 	//generate the JWTs
-	const { accessToken, refreshToken } = tokenGenerateRefresh(account.index, account.email, account.username, account.type, account.admin, account.mod);
+	const { accessToken, refreshToken } = await tokenGenerateRefresh(account.index, account.email, account.username, account.type, account.admin, account.mod);
 
 	//set the cookie
 	res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true, secure: true, sameSite: 'none', maxAge: 60 * 60 * 24 * 30 * 1000 }); //30 days

@@ -1,10 +1,8 @@
-const jwt = require('jsonwebtoken');
-
 const tokenRefresh = require('../utilities/token-refresh');
 
 //auth/token
 module.exports = async (req, res) => {
-	return tokenRefresh(req.cookies.refreshToken || '', (err, accessToken, refreshToken) => {
+	return await tokenRefresh(req.cookies.refreshToken || '', (err, accessToken, refreshToken) => {
 		if (err) {
 			return res.status(err).end();
 		}

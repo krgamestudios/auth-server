@@ -19,15 +19,15 @@ module.exports = async (oldRefreshToken, callback) => {
 		return callback(403);
 	}
 
-	jwt.verify(oldRefreshToken, process.env.SECRET_REFRESH, (err, user) => {
+	jwt.verify(oldRefreshToken, process.env.SECRET_REFRESH, async (err, user) => {
 		if (err) {
 			return callback(403);
 		}
 
-		const { accessToken, refreshToken } = generate(user.index, user.email, user.username, user.type, user.admin, user.mod);
+		await destroy(oldRefreshToken);
 
-		destroy(oldRefreshToken);
+		const { accessToken, refreshToken } = await generate(user.index, user.email, user.username, user.type, user.admin, user.mod);
 
-		return callback(null, accessToken, refreshToken);
+		return await callback(null, accessToken, refreshToken);
 	});
 };

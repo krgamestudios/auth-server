@@ -1,7 +1,7 @@
 const { tokens } = require('../database/models');
 
-module.exports = (refreshToken) => {
-	tokens.destroy({
+module.exports = async (refreshToken) => {
+	await tokens.destroy({
 		where: {
 			token: refreshToken || ''
 		}
