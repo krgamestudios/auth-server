@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
 
 	const decoded = jwt.decode(accessToken);
 
-	req.user = decoded.payload;
+	req.user = decoded;
 
 	return next();
 };
