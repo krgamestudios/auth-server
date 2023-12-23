@@ -11,9 +11,6 @@ router.post('/signup', require('./signup'));
 router.get('/validation', require('./validation'));
 router.post('/login', require('./login'));
 
-//refresh token
-router.post('/token', require('./token'));
-
 //password recover and reset
 router.post('/recover', require('./password-recover'));
 router.get('/reset', require('./password-redirect'));
@@ -23,8 +20,6 @@ router.patch('/reset', require('./password-reset'));
 router.delete('/logout', require('./logout'));
 
 //middleware
-router.use(tokenAuth);
-
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
 		where: {
@@ -42,6 +37,12 @@ router.use(async (req, res, next) => {
 
 	next();
 });
+
+//refresh token
+router.post('/token', require('./token'));
+
+//authenticate token
+router.use(tokenAuth);
 
 //basic account management (needs a token)
 router.get('/account', require('./account-query'));
