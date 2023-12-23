@@ -9,13 +9,9 @@ module.exports = (req, res, next) => {
 		return res.status(401).send('No access token provided');
 	}
 
-	return jwt.decode(accessToken, process.env.SECRET_ACCESS, (err, user) => {
-		if (err) {
-			return res.status(403).send(err);
-		}
+	const decoded = jwt.decode(accessToken);
 
-		req.user = user;
+	req.user = decoded.payload;
 
-		return next();
-	});
+	return next();
 };
