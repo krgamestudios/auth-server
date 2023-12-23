@@ -55,8 +55,7 @@ const question = (prompt, def = null) => {
 
 	//generate the files
 	const ymlfile = `
-version: '3'
-
+version: '3.8'
 services:
   ${appName}:
     build:
@@ -108,7 +107,7 @@ services:
       - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
   traefik_${appName}:
     container_name: ${appName}_traefik
-    image: "traefik:v2.4"
+    image: "traefik:v2.10"
     container_name: "traefik"
     command:
       - "--log.level=ERROR"
@@ -133,7 +132,7 @@ networks:
 `;
 
 	const dockerfile = `
-FROM node:18-bullseye-slim
+FROM node:21-bookworm-slim
 WORKDIR "/app"
 COPY package*.json ./
 RUN npm install --production

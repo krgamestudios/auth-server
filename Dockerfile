@@ -1,5 +1,5 @@
 
-FROM node:18-bullseye-slim
+FROM node:21-bookworm-slim
 WORKDIR "/app"
 COPY package*.json /app
 RUN npm install --production

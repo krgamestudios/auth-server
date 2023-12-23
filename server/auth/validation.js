@@ -44,7 +44,7 @@ const route = async (req, res) => {
 			hooks = JSON.parse(process.env.HOOK_POST_VALIDATION_ARRAY);
 
 			if (!Array.isArray(hooks)) {
-				throw 'isArray() check failed';
+				throw 'post validation hook isArray() check failed';
 			}
 
 			//authenticate the hooks

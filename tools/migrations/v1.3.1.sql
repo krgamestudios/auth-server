@@ -1,1 +1,0 @@
-ALTER TABLE `accounts` CHANGE `id` `index` INT( 11 ) NOT NULL AUTO_INCREMENT;
