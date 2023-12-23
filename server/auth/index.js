@@ -5,6 +5,7 @@ const { accounts } = require('../database/models');
 
 //middleware
 const tokenAuth = require('../utilities/token-auth');
+const tokenDecode = require('../utilities/token-decode');
 
 //signup -> validate -> login all without a token
 router.post('/signup', require('./signup'));
@@ -20,7 +21,7 @@ router.patch('/reset', require('./password-reset'));
 router.delete('/logout', require('./logout'));
 
 //authenticate token
-router.use(tokenAuth);
+router.use(tokenDecode);
 
 //middleware
 router.use(async (req, res, next) => {
@@ -43,6 +44,9 @@ router.use(async (req, res, next) => {
 
 //refresh token
 router.post('/token', require('./token'));
+
+//authenticate token
+router.use(tokenAuth);
 
 //basic account management (needs a token)
 router.get('/account', require('./account-query'));
