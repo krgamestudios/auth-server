@@ -19,6 +19,9 @@ router.patch('/reset', require('./password-reset'));
 //logouts allowed when banned, and when the token itself is invalid
 router.delete('/logout', require('./logout'));
 
+//authenticate token
+router.use(tokenAuth);
+
 //middleware
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
@@ -40,9 +43,6 @@ router.use(async (req, res, next) => {
 
 //refresh token
 router.post('/token', require('./token'));
-
-//authenticate token
-router.use(tokenAuth);
 
 //basic account management (needs a token)
 router.get('/account', require('./account-query'));
