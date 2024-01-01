@@ -27,7 +27,7 @@ router.use(tokenDecode);
 router.use(async (req, res, next) => {
 	const record = await accounts.findOne({
 		where: {
-			email: req.user.email || ''
+			email: req.user?.email || ''
 		}
 	});
 
