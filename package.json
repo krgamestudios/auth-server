@@ -1,6 +1,6 @@
 {
   "name": "auth-server",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "An API centric auth server. Uses Sequelize and mariaDB by default.",
   "main": "server/server.js",
   "scripts": {
@@ -22,17 +22,17 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mariadb": "^3.2.3",
+    "mariadb": "^3.3.0",
     "node-cron": "^3.0.3",
     "node-fetch": "^2.7.0",
-    "nodemailer": "^6.9.7",
-    "npm": "^9.9.2",
-    "sequelize": "^6.35.2"
+    "nodemailer": "^6.9.13",
+    "npm": "^10.5.2",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.1.0"
   }
 }
