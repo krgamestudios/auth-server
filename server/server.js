@@ -41,4 +41,5 @@ app.get('*', (req, res) => {
 server.listen(process.env.WEB_PORT || 3200, async (err) => {
 	await database.sync();
 	console.log(`listening to localhost:${process.env.WEB_PORT || 3200}`);
+	console.log(`database located at ${process.env.DB_HOSTNAME || '<default>'}:${process.env.DB_PORTNAME || '<default>'}`);
 });

@@ -13,7 +13,7 @@
     "url": "git+https://github.com/krgamestudios/auth-server.git"
   },
   "author": "Kayne Ruse",
-  "license": "ISC",
+  "license": "Zlib",
   "bugs": {
     "url": "https://github.com/krgamestudios/auth-server/issues"
   },

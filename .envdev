@@ -5,6 +5,8 @@ WEB_PORT=3200
 WEB_ORIGIN=http://localhost:3001
 
 DB_HOSTNAME=localhost
+DB_PORTNAME=3306
+
 DB_DATABASE=auth
 DB_USERNAME=auth
 DB_PASSWORD=charizard
