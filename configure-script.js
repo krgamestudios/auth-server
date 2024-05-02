@@ -74,20 +74,19 @@ const question = (prompt, def = null) => {
 
 	//generate the files
 	const ymlfile = `
-version: '3.8'
 services:
   ${appName}:
     build:
       context: .
     ports:
-      - "${appPort}"
+      - ${appPort}
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${appName}router.rule=Host(\`${appWebAddress}\`)"
-      - "traefik.http.routers.${appName}router.entrypoints=websecure"
-      - "traefik.http.routers.${appName}router.tls.certresolver=myresolver"
-      - "traefik.http.routers.${appName}router.service=${appName}service@docker"
-      - "traefik.http.services.${appName}service.loadbalancer.server.port=${appPort}"
+      - traefik.enable=true
+      - traefik.http.routers.${appName}router.rule=Host(\`${appWebAddress}\`)
+      - traefik.http.routers.${appName}router.entrypoints=websecure
+      - traefik.http.routers.${appName}router.tls.certresolver=myresolver
+      - traefik.http.routers.${appName}router.service=${appName}service@docker
+      - traefik.http.services.${appName}service.loadbalancer.server.port=${appPort}
     environment:
       - WEB_PROTOCOL=${appWebProtocol}
       - WEB_ORIGIN=${appWebOrigin}
@@ -109,10 +108,14 @@ services:
       - ADMIN_DEFAULT_PASSWORD=${appDefaultPass}
       - SECRET_ACCESS=${appSecretAccess}
       - SECRET_REFRESH=${appSecretRefresh}
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - app-network${ appDBHost != 'database' ? '' : `
     depends_on:
       - database
+
   database:
     image: mariadb:latest
     environment:
@@ -125,35 +128,41 @@ services:
       - app-network
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro`}
+      - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro`}
+
   traefik_${appName}:
     container_name: ${appName}_traefik
-    image: "traefik:v2.10"
-    container_name: "traefik"
+    image: traefik:latest
+    container_name: traefik
     command:
-      - "--log.level=ERROR"
-      - "--api.insecure=false"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=${supportEmail}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - --log.level=ERROR
+      - --api.insecure=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.email=${supportEmail}
+      - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
-      - "./letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - app-network
+
 networks:
   app-network:
     driver: bridge
 `;
 
 	const dockerfile = `
-FROM node:21-bookworm-slim
+FROM node:22-bookworm-slim
 WORKDIR "/app"
 COPY package*.json ./
 RUN npm install --production

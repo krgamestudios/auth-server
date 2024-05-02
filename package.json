@@ -27,9 +27,8 @@
     "jsonwebtoken": "^9.0.2",
     "mariadb": "^3.3.0",
     "node-cron": "^3.0.3",
-    "node-fetch": "^2.7.0",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.13",
-    "npm": "^10.5.2",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
