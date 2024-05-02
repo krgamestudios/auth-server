@@ -6,7 +6,7 @@ This server is available via docker hub at krgamestudios/auth-server.
 
 # Setup
 
-There are multiple ways to run this app - it can run on it's own via `npm start` (for production) or `npm run dev` (for development). it can also run inside docker using `docker-compose up --build` - run `node configure-script.js` to generate docker-compose.yml and startup.sql.
+There are multiple ways to run this app - it can run on it's own via `npm start` (for production) or `npm run dev` (for development). it can also run inside docker using `docker compose up --build` - run `node configure-script.js` to generate docker-compose.yml and startup.sql.
 
 # API
 
@@ -79,7 +79,7 @@ Cookie: refreshToken
 ###
 
 
-//DOCS: Retreives the private account data, results vary
+//DOCS: Retrieves the private account data, results vary
 GET /auth/account
 Authorization: Bearer accessToken
 

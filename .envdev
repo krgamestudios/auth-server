@@ -22,6 +22,9 @@ ADMIN_DEFAULT_USERNAME=admin
 # Give this a value to generate the default admin account (must be at least 8 characters)
 ADMIN_DEFAULT_PASSWORD=password
 
+# Give this a value to generate teh default admin account (must be a valid domain name, to pass the initial email check)
+ADMIN_DEFAULT_HOSTNAME=example.com
+
 # Select a "TZ database name" that suits your needs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 DB_TIMEZONE=Australia/Sydney
 

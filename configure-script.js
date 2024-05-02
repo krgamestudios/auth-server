@@ -65,6 +65,7 @@ const question = (prompt, def = null) => {
 	const appMailPhysical = await question('Mail Physical');
 
 	const appDefaultUser = await question('App Default User', '');
+	const appDefaultHost = await question('App Default Host', '');
 	const appDefaultPass = await question('App Default Pass', '');
 
 	const appSecretAccess = await question('Access Token Secret', uuid(32));
@@ -105,6 +106,7 @@ services:
       - MAIL_PASSWORD=${appMailPass}
       - MAIL_PHYSICAL=${appMailPhysical}
       - ADMIN_DEFAULT_USERNAME=${appDefaultUser}
+      - ADMIN_DEFAULT_HOSTNAME=${appDefaultHost}
       - ADMIN_DEFAULT_PASSWORD=${appDefaultPass}
       - SECRET_ACCESS=${appSecretAccess}
       - SECRET_REFRESH=${appSecretRefresh}
