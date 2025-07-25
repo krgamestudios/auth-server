@@ -33,7 +33,7 @@ app.use('/admin', require('./admin'));
 app.use('/auth', require('./auth'));
 
 //error on access
-app.get('*', (req, res) => {
+app.get('/{*any}', (req, res) => {
 	res.redirect('https://github.com/krgamestudios/auth-server');
 });
 
